@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <center>
+    <input onkeyup="search()" id='input1'placeholder="Entrer votre recette">
+    <h3 id="h3"></h3>
+    <br>
+    <img id="imago">
+    <br>
+    <p  id="texto1"></p>
+  </center>
+  <style>
+    
+    
+
+body{
+  display:block;
+  background: black;
+}
+ 
+img{
+  border:2px solid darkorange;
+  height:99px;
+  width:190px;
+  border-radius: 7px;
+  
+}
+input{
+  height:30px;
+  width: 250px;
+  font-size:15px;
+  margin:22px;
+  border-radius: 6px;
+  border: 2px solid darkorange;
+  animation: entre 2s forwards;
+}
+@keyframes entre{
+  
+  to{
+    width:250px;
+  }
+  from{
+    width:0px;
+  }
+}
+h3{
+
+  height:70px;
+  width: 177px;
+  margin: 0px;
+  color:white;
+  text-shadow: 5px 5px 5px darkorange;
+}
+p{
+  text-shadow: 5px 5px 5px darkorange;
+  color:white;
+}
+   
+  </style>
+  
+    <script>
+      
+      function search(){
+  // Tab to edit
+  let texto=document.getElementById("input1").value;
+  fetch("https://www.themealdb.com/api/json/v1/1/search.php?s="+texto).then(response=>response.json()).then(response=>{
+   
+   texto1.innerHTML="<h2>recette</h2>"+response.meals[0].strInstructions;
+    h3.textContent=response.meals[0].strMeal;
+    imago.src=response.meals[0].strMealThumb;
+})
+
+}
+      
+      
+    </script>
+</body>
+</html>
